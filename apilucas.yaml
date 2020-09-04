@@ -6,9 +6,6 @@ info:
   description: 'Aprendiendo OpenAPI (By Lucas)'
 
 servers:
-# Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/Maspero-SA/Ejemplo/1.0
   - url: https://dev.foo.com/v1
     description: Development Server
     
@@ -19,6 +16,7 @@ paths:
   /empleados:
     get:
       description: Obtener lista detallada de empleados
+      deprecated: true
       parameters:
         - name: bodyLimit
           in: query
