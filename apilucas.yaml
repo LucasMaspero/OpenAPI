@@ -16,6 +16,7 @@ paths:
   /empleados:
     get:
       description: Obtener lista detallada de empleados
+      deprecated: true
       parameters:
         - name: bodyLimit
           in: query
