@@ -1,5 +1,11 @@
 {
   "name": "openapiexxample",
+  "description": "OpenAPI Spec Example with TeamCity",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LucasMaspero/OpenAPI.git"
+  },
+  "license": "None",
   "version": "1.0.0",
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^1.0.18-4.3.1"
