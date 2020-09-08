@@ -22,7 +22,7 @@ paths:
           description: Cantidad de empleados a devolver por pagina
           schema:
             type: integer
-            minimum: 7
+            minimum: 8
             maximum: 50
             example: 10
         - name: pageLimit
