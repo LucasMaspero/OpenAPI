@@ -4,6 +4,7 @@ SwaggerParser.validate("apilucas.yaml", (err, api) => {
   if (err) {
     console.error(err);
   } else {
-    console.log("API name: %s, Version: %s", api.info.title, api.info.version);
+    var lala = "##teamcity[setParameter name='ddd' value='" + api.info.title + "']";
+    console.log(lala);
   }
 });
