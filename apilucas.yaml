@@ -1,8 +1,8 @@
 openapi: 3.0.0
 
 info:
-  version: '158.9'
-  title: 'API de Ejemplo'
+  version: '2.0'
+title: 'API de Ejemplo'
   description: 'Aprendiendo OpenAPI (By Lucas)'
 
 servers:
