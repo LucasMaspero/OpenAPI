@@ -1,9 +1,9 @@
 import SwaggerParser from "@apidevtools/swagger-parser";
 import format from "string-template";
 
-SwaggerParser.validate("apilucas.yaml", (err, api) => {
-  if (err) {
-    console.error(err);
+SwaggerParser.validate("apilucas.yaml", (error, api) => {
+  if (error) {
+    console.error(`YAML syntax validator found error "${error.name}" with message "${error.message}".`);
   } else {
     addTeamCityVariable("ApiVersion", api.info.version);
   }
