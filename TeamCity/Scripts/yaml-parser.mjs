@@ -1,6 +1,6 @@
 import SwaggerParser from "@apidevtools/swagger-parser";
 
-SwaggerParser.validate("API/%OpenAPISpecFile%", (error, api) => {
+SwaggerParser.validate("API/api.yaml", (error, api) => {
   if (error) {
     // Throw an error to force TeamCity build step to fail
     throw `YAML syntax validator found error "${error.name}" with message "${error.message}".`;
