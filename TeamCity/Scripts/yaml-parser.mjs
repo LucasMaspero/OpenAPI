@@ -8,7 +8,7 @@ SwaggerParser.validate("API/api.yaml", (error, api) => {
 
   var apiMajorVersion = api.info.version.split(".")[0]; // Take the first number of the version
   var apiMinorVersion = api.info.version.split(".").slice(1).join("."); // Take the other numbers of the version
-  var apiName = api.info.name.split(" ").join(""); // Whitespaces removed
+  var apiName = api.info.title.split(" ").join(""); // Whitespaces removed
 
   addTeamCityParameter("ApiMajorVersion", apiMajorVersion);
   addTeamCityParameter("ApiMinorVersion", apiMinorVersion);
