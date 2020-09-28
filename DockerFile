@@ -18,7 +18,7 @@ RUN npm run validate-spec
 #  -o /local/out/go
 
 FROM openapitools/openapi-generator-cli AS generate-service-dotnetcore
-RUN openapi-generator-cli generate -g aspnetcore -i Specification/security-api-specification.yaml -o .\\Output\\SecurityService\\NetCore --additional-properties=aspnetCoreVersion=3.1,generateBody=false,classModifier=abstract,operationModifier=abstract,operationResultTask=true,useFrameworkReference=false,useSwashbuckle=false
+RUN openapitools/openapi-generator-cli generate -g aspnetcore -i Specification/security-api-specification.yaml -o .\\Output\\SecurityService\\NetCore --additional-properties=aspnetCoreVersion=3.1,generateBody=false,classModifier=abstract,operationModifier=abstract,operationResultTask=true,useFrameworkReference=false,useSwashbuckle=false
 
 # Step 4: Build .NET Core API Service Stubs
 
