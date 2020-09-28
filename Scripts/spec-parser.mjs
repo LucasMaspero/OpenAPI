@@ -19,7 +19,7 @@ SwaggerParser.validate(appRoot.path + "/Specification/security-api-specification
     
     process.exit(ERROR);
   } else {
-    console.log("OpenAPI Specification Parser found no errors.", 'background: #222; color: #bada55');
+    console.info("OpenAPI Specification Parser found no errors.");
 
     if (!devMode) {
       addTeamCityParameters(securityApiSpec);

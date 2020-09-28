@@ -3,7 +3,9 @@ FROM node:12 AS npm-i
 WORKDIR /.
 COPY package*.json ./
 RUN npm install
+RUN npm install @openapitools/openapi-generator-cli -g
 COPY . .
+
 
 # Step 2: Validate Specification File
 FROM npm-i AS validate
