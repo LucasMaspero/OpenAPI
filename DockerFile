@@ -3,7 +3,6 @@ FROM node:12 AS npm-i
 WORKDIR /.
 COPY package*.json ./
 RUN npm install
-RUN npm install @openapitools/openapi-generator-cli -g
 COPY . .
 
 
@@ -19,7 +18,6 @@ RUN npm run validate-spec
 #  -o /local/out/go
 
 FROM openapitools/openapi-generator-cli AS generate-service-dotnetcore
-WORKDIR /.
 RUN openapi-generator-cli generate -g aspnetcore -i Specification/security-api-specification.yaml -o .\\Output\\SecurityService\\NetCore --additional-properties=aspnetCoreVersion=3.1,generateBody=false,classModifier=abstract,operationModifier=abstract,operationResultTask=true,useFrameworkReference=false,useSwashbuckle=false
 
 # Step 4: Build .NET Core API Service Stubs
