@@ -1,8 +1,10 @@
 import SwaggerParser from "@apidevtools/swagger-parser";
 import appRoot from "app-root-path";
 
+const ERROR = 1;
+
 // Global Options
-var devMode = false
+var devMode = false;
 
 // Command Line Arguments
 handleCommandLineArguments();
@@ -13,11 +15,9 @@ SwaggerParser.validate(appRoot.path + "/Specification/security-api-specification
   if (parserError) {
     var errorMessage = `OpenAPI Specification Parser found error "${parserError.name}" with message "${parserError.message}".`;
 
-    if (!devMode) {
-      throw errorMessage; // Throw an error to force TeamCity build step to fail
-    } else {
-      console.error(errorMessage);
-    }
+    console.error(errorMessage);
+    
+    process.exit(ERROR);
   } else {
     console.log("OpenAPI Specification Parser found no errors.");
 
