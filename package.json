@@ -1,14 +1,40 @@
 {
-  "name": "openapiexxample",
-  "description": "OpenAPI Spec Example with TeamCity",
+  "name": "security-documentation",
+  "description": "This is the specification of the schemas and endpoints for the Fixed Income Solution's Security Service",
   "repository": {
     "type": "git",
-    "url": "https://github.com/LucasMaspero/OpenAPI.git"
+    "url": "https://github.com/Parametric/PPA.FIP.SecurityDocumentation.git"
   },
   "license": "UNLICENSED",
   "version": "1.0.0",
+  "scripts": {
+    "bundle-spec": "node Scripts/spec-bundler.mjs",
+    "validate-spec": "node Scripts/spec-parser.mjs --dev",
+    "documentation": "npm run bundle-spec && webpack-dev-server --config Documentation/webpack.config.js --open --port 8000",
+    "generate-service-dotnetcore": "openapi-generator generate -g aspnetcore -i Specification/security-api-specification.yaml -o .\\Output\\SecurityService\\NetCore --additional-properties=aspnetCoreVersion=3.1,generateBody=false,classModifier=abstract,operationModifier=abstract,operationResultTask=true,useFrameworkReference=false,useSwashbuckle=false",
+    "generate-service-javaspring": "openapi-generator generate -g spring -i Specification/security-api-specification.yaml -o .\\Output\\SecurityService\\JavaSpring",
+    "generate-service-pythonaiohttp": "openapi-generator generate -g python-aiohttp -i Specification/security-api-specification.yaml -o .\\Output\\SecurityService\\PythonAioHttp",
+    "generate-client-angular": "openapi-generator generate -g typescript-angular -i Specification/security-api-specification.yaml -o .\\Output\\SecurityClient\\Angular",
+    "generate-client-java": "openapi-generator generate -g java -i Specification/security-api-specification.yaml -o .\\Output\\SecurityClient\\Java",
+    "generate-client-python": "openapi-generator generate -g python -i Specification/security-api-specification.yaml -o .\\Output\\SecurityClient\\Python"
+  },
   "dependencies": {
     "@apidevtools/swagger-parser": "10.0.2",
-    "@openapitools/openapi-generator-cli": "^1.0.18-4.3.1"
+    "@openapitools/openapi-generator-cli": "^1.0.18-4.3.1",
+    "app-root-path": "^3.0.0",
+    "json-to-pretty-yaml": "^1.2.2",
+    "css-loader": "^2.1.0",
+    "json-loader": "^0.5.7",
+    "style-loader": "^0.23.1",
+    "swagger-ui": "^3.34.0",
+    "yaml-loader": "^0.5.0"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^1.0.1",
+    "copy-webpack-plugin": "^4.6.0",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.1.14"
   }
 }
