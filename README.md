@@ -11,7 +11,7 @@ To run custom scripts do npm run scriptName in your command line.
     * **'validate-spec'**: validates specification file syntax and structure.
  
 * #### Documentation:
-    * **'documentation'**: runs swagger ui documentation web page locally at 'http://localhost:8000/'.
+    * **'documentation'**: runs swagger ui documentation web page locally at 'http://localhost:8080/'.
  
 * #### Code Generation:
     * #### Server Code Generation:
