@@ -1,7 +1,13 @@
+# Step 1: Install Node Packages
 FROM node:12
 WORKDIR /.
 COPY package*.json ./
 RUN npm install
 COPY . .
-EXPOSE 8080
-CMD ["npm", "run", "documentation"]
+
+# Step 2: Validate Specification File
+RUN npm run validate-spec
+
+# Step X: Run Documentation UI
+#EXPOSE 8080
+#CMD ["npm", "run", "documentation"]
