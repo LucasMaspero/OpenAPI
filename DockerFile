@@ -12,8 +12,15 @@ FROM npm-i AS validate
 RUN npm run validate-spec
 
 # Step 3: Generate .NET Core API Service Stubs
+#docker run --rm \
+#  -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+#  -i /local/petstore.yaml \
+#  -g go \
+#  -o /local/out/go
+
 FROM validate AS generate-service-dotnetcore
-RUN npm run generate-service-dotnetcore
+VOLUME ${PWD}:/local
+RUN openapi-generator-cli generate -g aspnetcore -i Specification/security-api-specification.yaml -o .\\Output\\SecurityService\\NetCore --additional-properties=aspnetCoreVersion=3.1,generateBody=false,classModifier=abstract,operationModifier=abstract,operationResultTask=true,useFrameworkReference=false,useSwashbuckle=false
 
 # Step 4: Build .NET Core API Service Stubs
 
