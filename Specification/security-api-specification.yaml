@@ -2,7 +2,7 @@ openapi: 3.0.0
 
 info:
   version: '1.0'
-title: 'Empleados API'
+  title: 'Empleados API'
   description: 'Aprendiendo OpenAPI (By Lucas)'
 
 servers:
