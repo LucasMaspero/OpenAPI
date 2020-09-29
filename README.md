@@ -1,6 +1,15 @@
 # PPA.FIP.Security.Documentation
 This is the specification of the schemas and endpoints for the Fixed Income Solution's Security Service
- 
+
+## Requirements
+    * **Node** 12 at a minimum.
+    * **npm** 6 at a minimum.
+    * **Java** 8 runtime at a minimum.
+    * **Docker** 19 at a minimum.
+
+## Installation
+    * Run **npm install** and you will be ready to start running scripts (defined in below sections).
+
 ## Custom Scripts
 To run custom scripts do npm run scriptName in your command line.
  
@@ -26,6 +35,6 @@ To run custom scripts do npm run scriptName in your command line.
 
 * #### Docker:
 To access swagger ui documentation web page within docker go to 'http://localhost:80/'
-    * **'docker-build-image'**: builds docker image ("security-api-documentation-image") for swagger ui documentation web page.
-    * **'docker-run-image'**: runs docker container ("security-api-documentation-container") based on the built docker image.
+    * **'docker-build'**: builds docker image ("security-api-documentation-image") for swagger ui documentation web page.
+    * **'docker-run**: runs docker container ("security-api-documentation-container") based on the built docker image. **Fails** if a previous container created by this command is running.
     * **'docker-start'**: builds docker image and runs docker container based on the built docker image.
