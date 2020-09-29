@@ -9,10 +9,11 @@ To run custom scripts do npm run scriptName in your command line.
 * #### Specification:
     * **'bundle-spec'**: generates a single bundled specification file in path '/Output/Specification/'.
     * **'validate-spec'**: validates specification file syntax and structure.
+    * **'parse-spec'**: parses specification file and generates files in path '/Output/BuildParameters/' with useful information for build process.
  
 * #### Documentation:
     * **'documentation'**: runs swagger ui documentation web page locally at 'http://localhost:8080/'.
- 
+
 * #### Code Generation:
     * #### Server Code Generation:
         * **'generate-service-dotnetcore'**: generates service stubs for .Net Core in path '/Output/SecurityService/NetCore'.
@@ -22,3 +23,9 @@ To run custom scripts do npm run scriptName in your command line.
         * **'generate-client-angular'**: generates client stubs for Angular in path '/Output/SecurityClient/Angular'.
         * **'generate-client-java'**: generates client stubs for Java in path '/Output/SecurityClient/Java'.
         * **'generate-client-python'**: generates client stubs for Python in path '/Output/SecurityClient/Python'.
+
+* #### Docker:
+To access swagger ui documentation web page within docker go to 'http://localhost:80/'
+    * **'docker-build-image'**: builds docker image ("security-api-documentation-image") for swagger ui documentation web page.
+    * **'docker-run-image'**: runs docker container ("security-api-documentation-container") based on the built docker image.
+    * **'docker-start'**: builds docker image and runs docker container based on the built docker image.

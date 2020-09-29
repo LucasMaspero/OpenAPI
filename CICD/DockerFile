@@ -1,0 +1,49 @@
+# Node & Java Base
+FROM timbru31/java-node
+
+# Arguments
+ARG BUILD_COUNTER
+
+# Initialize
+WORKDIR /.
+COPY . .
+
+# Step 1: Install Node Packages
+RUN npm install
+
+# Step 2: Validate Specification File
+RUN npm run validate-spec
+
+# Step 3: Get Build Parameters
+RUN npm run parse-spec
+
+# Step 4: Generate .NET Core API Service Stubs (Using Previous Build Parameters)
+RUN export API_MAJOR_VERSION=$(cat /Output/BuildParameters/ApiMajorVersion) \
+    && export API_MINOR_VERSION=$(cat /Output/BuildParameters/ApiMinorVersion) \
+    && npm run generate-service-dotnetcore -- --additional-properties=packageVersion=${API_MAJOR_VERSION}.${API_MINOR_VERSION}.${BUILD_COUNTER}
+
+# DotNet Base
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+
+# Copying files between stages
+COPY --from=0 . .
+
+# Arguments
+ARG BUILD_COUNTER
+ARG NUGET_FEED_API_KEY
+ARG NUGET_FEED
+
+# Specifying NuGet Id
+WORKDIR /.
+RUN sed -i 's/\$id\$/PPA.FIP.Security.Specification/' Output/SecurityService/NetCore/src/PPA.FIP.Security.Specification/PPA.FIP.Security.Specification.nuspec
+
+# Step 5: Build .NET Core API Service Stubs
+RUN dotnet build Output/SecurityService/NetCore/src/PPA.FIP.Security.Specification
+
+# Step 6: Create NuGet Package from Service Stubs
+RUN dotnet pack Output/SecurityService/NetCore/src/PPA.FIP.Security.Specification/PPA.FIP.Security.Specification.csproj -p:NuspecFile=PPA.FIP.Security.Specification.nuspec -o nupkgs
+
+# Step 7: Publish NuGet Package
+#RUN export API_MAJOR_VERSION=$(cat /Output/BuildParameters/ApiMajorVersion) \
+#    && export API_MINOR_VERSION=$(cat /Output/BuildParameters/ApiMinorVersion) \
+#    && dotnet nuget push nupkgs/PPA.FIP.Security.Specification.${API_MAJOR_VERSION}.${API_MINOR_VERSION}.${BUILD_COUNTER}.nupkg --api-key ${NUGET_FEED_API_KEY} --source ${NUGET_FEED}
