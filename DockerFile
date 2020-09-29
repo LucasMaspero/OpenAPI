@@ -41,4 +41,4 @@ RUN dotnet build
 RUN dotnet pack -p:NuspecFile=Org.OpenAPITools.nuspec -o nupkgs
 
 # Step 7: Publish NuGet Package
-RUN dotnet nuget push nupkgs/PPA.FIP.Security.Specification.25.7.9.nupkg --api-key ${NUGET_FEED_API_KEY} --source ${NUGET_FEED}
+RUN dotnet nuget push nupkgs/PPA.FIP.Security.Specification.25.7.9.nupkg --api-key $NUGET_FEED_API_KEY --source $NUGET_FEED
