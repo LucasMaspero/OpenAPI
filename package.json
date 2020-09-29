@@ -12,15 +12,15 @@
     "bundle-spec": "node Scripts/spec-bundler.mjs",
     "validate-spec": "node Scripts/spec-parser.mjs --dev",
     "documentation": "npm run bundle-spec && webpack-dev-server --config Documentation/webpack.config.js --host 0.0.0.0 --inline --progress --port 8080",
-    "generate-service-dotnetcore": "openapi-generator generate -g aspnetcore -i Specification/security-api-specification.yaml -o Output/SecurityService/NetCore --additional-properties=aspnetCoreVersion=3.1,generateBody=false,classModifier=abstract,operationModifier=abstract,operationResultTask=true,useFrameworkReference=false,useSwashbuckle=false,buildTarget=library",
+    "generate-service-dotnetcore": "openapi-generator generate -g aspnetcore -i Specification/security-api-specification.yaml -o Output/SecurityService/NetCore --additional-properties=aspnetCoreVersion=3.1,generateBody=false,classModifier=abstract,operationModifier=abstract,operationResultTask=true,useFrameworkReference=false,useSwashbuckle=false,buildTarget=library,isLibrary=true",
     "generate-service-javaspring": "openapi-generator generate -g spring -i Specification/security-api-specification.yaml -o .\\Output\\SecurityService\\JavaSpring",
     "generate-service-pythonaiohttp": "openapi-generator generate -g python-aiohttp -i Specification/security-api-specification.yaml -o .\\Output\\SecurityService\\PythonAioHttp",
     "generate-client-angular": "openapi-generator generate -g typescript-angular -i Specification/security-api-specification.yaml -o .\\Output\\SecurityClient\\Angular",
     "generate-client-java": "openapi-generator generate -g java -i Specification/security-api-specification.yaml -o .\\Output\\SecurityClient\\Java",
     "generate-client-python": "openapi-generator generate -g python -i Specification/security-api-specification.yaml -o .\\Output\\SecurityClient\\Python",
     "docker-start": "npm run docker-build-image && npm run docker-run-image",
-    "docker-build-image": "docker build -t security-api-documentation-image .",
-    "docker-run-image": "docker run -d -p 80:8080 --name security-api-documentation-container security-api-documentation-image"
+    "docker-build-image": "docker build --build-arg BUILD_COUNTER=1 -t security-api-documentation-image .",
+    "docker-run-image": "docker run -d -p 80:8080  --name security-api-documentation-container security-api-documentation-image"
   },
   "dependencies": {
     "@apidevtools/swagger-parser": "10.0.2",
