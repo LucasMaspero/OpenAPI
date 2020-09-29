@@ -5,7 +5,7 @@ FROM timbru31/java-node
 ARG BUILD_COUNTER
 
 # Initialize
-WORKDIR /.
+WORKDIR /..
 COPY . .
 
 # Step 1: Install Node Packages
