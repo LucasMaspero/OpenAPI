@@ -1,28 +1,24 @@
-# Step 1: Install Node Packages
-FROM node:12 AS npm-i
-WORKDIR /.
-COPY package*.json ./
-RUN npm install
-COPY . .
+# Node & Java Base
+FROM timbru31/java-node
 
+# Step 1: Install Node Packages
+WORKDIR /.
+COPY . .
+RUN npm install
 
 # Step 2: Validate Specification File
-FROM npm-i AS validate
 RUN npm run validate-spec
 
 # Step 3: Generate .NET Core API Service Stubs
-#docker run --rm \
-#  -v ${PWD}:/local openapitools/openapi-generator-cli generate \
-#  -i /local/petstore.yaml \
-#  -g go \
-#  -o /local/out/go
-
-FROM openapitools/openapi-generator-cli AS generate-service-dotnetcore
-RUN openapi-generator help
+RUN npm run generate-service-dotnetcore
+    
+# DotNet Base & Copying files between stages
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+COPY --from=0 . .
 
 # Step 4: Build .NET Core API Service Stubs
+WORKDIR /Output/SecurityService/NetCore/src/Org.OpenAPITools
+RUN dotnet build
 
-# Step X: Run Documentation UI
-#FROM validate AS run-documentation
-#EXPOSE 8080
-#CMD ["npm", "run", "documentation"]
+# Step 5: Create NuGet Package from Service Stubs
+RUN dotnet pack
